@@ -41,7 +41,7 @@ a, a:visited {
     color: rgb(255, 255, 255)
 }
 
-#token-input, #channelid-input, #content-input, #delay-inpt {
+#token-input, #channelid-input, #content-input, #delay-input {
     font-size: 25px;
     background-color: #000000;
     width: 75%;
