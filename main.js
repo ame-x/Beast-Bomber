@@ -1,7 +1,4 @@
-'use strict'
- {
-  const send-btn = document.getElementById('send-btn');
-  btn.addEventListener('click', (stop) => {
-      btn.textContent = 'stop';
- })
-}
+var btn_send = addBtn("Send");
+var btn_stop = addBtn("Stop").hide();
+var nowStatus = $("<div>").appendTo(h);
+h.append("<br><br><br><br>");
