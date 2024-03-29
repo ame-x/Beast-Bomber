@@ -108,5 +108,6 @@ const tokenInput = ezSelector('#token-input')
             }
         }
         target.disabled = false
+        time.sleep(delay)
     })
 }
