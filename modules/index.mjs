@@ -20,19 +20,6 @@ const sleep = (delay = 0) => new Promise(resolve => setTimeout(resolve, Math.min
     window.addEventListener('resize', handler)
     handler()
 }
-{
-    const select = ezSelector('#tool-select'),
-        handler = () => {
-            const e = ezSelector('#checkalive-result')
-            e.classList.remove('checkalive-result-show', 'checkalive-result-alive', 'checkalive-result-dead')
-            e.classList.add('checkalive-result-hide')
-            for (const e of ezSelector('.content-item')) e.style.display = e.id.slice(0, -5) === select.value
-                ? 'block'
-                : 'none'
-        }
-    select.addEventListener('change', handler)
-    handler()
-}
 ezSelector('#legacy-version-info-close').addEventListener('click', ({ target }) => void target.parentNode.parentNode.removeChild(target.parentNode))
 const tokenInput = ezSelector('#token-input')
 {
@@ -42,28 +29,12 @@ const tokenInput = ezSelector('#token-input')
         alert('Invalid Token Format.')
         target.focus()
     })
-    ezSelector('#checkalive-btn').addEventListener('click', async ({ target }) => {
+    ezSelector('#send-btn').addEventListener('click', async ({ target }) => {
         if (tokenInput.value.length === 0) {
             alert('Token is not entered.')
             tokenInput.focus()
             return
         }
-        const e = ezSelector('#checkalive-result')
-        e.classList.remove('checkalive-result-show', 'checkalive-result-alive', 'checkalive-result-dead')
-        e.classList.add('checkalive-result-hide')
-        target.disabled = true
-        const result = await new DiscordToken(tokenInput.value).checkAlive()
-        e.textContent = result
-            ? 'Token has been determined to be alive.'
-            : 'Token has been determined to be dead.'
-        e.classList.remove('checkalive-result-hide')
-        e.classList.add(
-            'checkalive-result-show',
-            result
-                ? 'checkalive-result-alive'
-                : 'checkalive-result-dead'
-        )
-        target.disabled = false
     })
 }
 {
