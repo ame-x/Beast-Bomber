@@ -20,6 +20,26 @@ const sleep = (delay = 0) => new Promise(resolve => setTimeout(resolve, Math.min
     window.addEventListener('resize', handler)
     handler()
 }
+    select.addEventListener('change', handler)
+    handler()
+}
+ezSelector('#legacy-version-info-close').addEventListener('click', ({ target }) => void target.parentNode.parentNode.removeChild(target.parentNode))
+const tokenInput = ezSelector('#token-input')
+{
+    tokenInput.addEventListener('change', ({ target }) => {
+        if (DiscordToken.validate.token(target.value)) return
+        target.value = ''
+        alert('Invalid Token Format.')
+        target.focus()
+    })
+    ezSelector('#checkalive-btn').addEventListener('click', async ({ target }) => {
+        if (tokenInput.value.length === 0) {
+            alert('Token is not entered.')
+            tokenInput.focus()
+            return
+        }
+    })
+}
 {
     const channelIdInput = ezSelector('#channelid-input'),
         contentInput = ezSelector('#content-input')
