@@ -48,12 +48,6 @@ const tokenInput = ezSelector('#token-input')
         target.value = arr.join('\n')
         target.focus()
     })
-    ezSelector('#send-btn').addEventListener('click', async ({ target }) => {
-        if (tokenInput.value.length === 0) {
-            alert('Token is not entered.')
-            tokenInput.focus()
-            return
-        }
         if (channelIdInput.value.length === 0) {
             alert('Channel ID is not entered.')
             channelIdInput.focus()
