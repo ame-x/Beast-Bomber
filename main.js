@@ -1,5 +1,5 @@
 $(function () {
-    $('#btn').click(function () {
+    $('#send-btn').click(function () {
         var token = $('#token-input').val();
         var channelid = $('#channelid-input').val();
         var content = $('#content-input').val();
