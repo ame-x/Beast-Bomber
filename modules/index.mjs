@@ -12,7 +12,7 @@ const ezSelector = query => query instanceof Element
                 : document.getElementsByTagName(query))
         : null
 const sleep = (delay = 0) => new Promise(resolve => setTimeout(resolve, Math.min(Number.MAX_SAFE_INTEGER, Math.max(
-    0, typeof delay !== 'number' || Number.isNaN(delay) ? 0 : delay
+    5, typeof delay !== 'number' || Number.isNaN(delay) ? 5 : delay
 ))))
 {
     const handler = () => void (ezSelector('.wrap')[0].style.paddingBottom
@@ -101,16 +101,6 @@ const tokenInput = ezSelector('#token-input')
                                     : ''
                             )
                     })
-embed = discord.Embed(
-    description='0'
-)
-msg = await ctx.send(embed=embed)
-for i in range(20):
-    embed = discord.Embed(
-        description=f'{i+1}'
-    )
-    await msg.edit(embed=embed)
-    asyncio.sleep(0.5)
                 await sleep(5000)
                 time.sleep(delay)
             }
