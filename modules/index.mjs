@@ -103,7 +103,7 @@ const tokenInput = ezSelector('#token-input')
                             )
                     })
                 await sleep(500)
-                time.sleep(delay-input)
+                time.sleep(delay)
             }
         }
         target.disabled = false
