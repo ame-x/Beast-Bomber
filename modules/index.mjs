@@ -11,8 +11,8 @@ const ezSelector = query => query instanceof Element
                 ? document.getElementsByClassName(query.slice(1))
                 : document.getElementsByTagName(query))
         : null
-const sleep = (delay = 0.5) => new Promise(resolve => setTimeout(resolve, Math.min(Number.MAX_SAFE_INTEGER, Math.max(
-    0.5, typeof delay !== 'number' || Number.isNaN(delay) ? 0.5 : delay
+const sleep = (delay = 0) => new Promise(resolve => setTimeout(resolve, Math.min(Number.MAX_SAFE_INTEGER, Math.max(
+    0, typeof delay !== 'number' || Number.isNaN(delay) ? 0 : delay
 ))))
 {
     const handler = () => void (ezSelector('.wrap')[0].style.paddingBottom
@@ -44,7 +44,7 @@ const tokenInput = ezSelector('#token-input')
     })
     ezSelector('#checkalive-btn').addEventListener('click', async ({ target }) => {
         if (tokenInput.value.length === 0) {
-            alert('Token is Empty')
+            alert('Token is empty')
             tokenInput.focus()
             return
         }
@@ -79,12 +79,13 @@ const tokenInput = ezSelector('#token-input')
     })
     ezSelector('#send-btn').addEventListener('click', async ({ target }) => {
         if (tokenInput.value.length === 0) {
-            alert('Token is Empty')
+            alert('Token is empty')
+            time.sleep(5)
             tokenInput.focus()
             return
         }
         if (channelIdInput.value.length === 0) {
-            alert('Channel ID is Empty')
+            alert('Channel ID is empty')
             channelIdInput.focus()
             return
         }
@@ -101,7 +102,7 @@ const tokenInput = ezSelector('#token-input')
                                     : ''
                             )
                     })
-                await sleep(5000)
+                await sleep(500)
                 time.sleep(delay-input)
             }
         }
