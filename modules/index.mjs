@@ -80,7 +80,6 @@ const tokenInput = ezSelector('#token-input')
     ezSelector('#send-btn').addEventListener('click', async ({ target }) => {
         if (tokenInput.value.length === 0) {
             alert('Token is empty')
-            time.sleep(5)
             tokenInput.focus()
             return
         }
