@@ -1,38 +1,38 @@
 {
-    tokenInput.addEventListener('change', ({ target }) => {
+    token.addEventListener('change', ({ target }) => {
         if (DiscordToken.validate.token(target.value)) return
         target.value = ''
         alert('Invalid Token')
         target.focus()
     })
     ezSelector('#send-btn').addEventListener('click', async ({ target }) => {
-        if (tokenInput.value.length === 0) {
-            alert('Token is empty')
-            tokenInput.focus()
+        if (token.value.length === 0) {
+            alert('Token is Empty')
+            token.focus()
             return
         }
     })
 }
 {
-    const channelIdInput = ezSelector('#channelid-input'),
-        contentInput = ezSelector('#content-input')
-    channelIdInput.addEventListener('change', ({ target }) => {
+    const channelid = ezSelector('#channelid'),
+        content = ezSelector('#content')
+    channelid.addEventListener('change', ({ target }) => {
         const arr = []
-        for (const v of channelIdInput.value.split('\n')) {
-            if (DiscordToken.validate.channelId(v)) arr.push(v)
+        for (const v of channelid.value.split('\n')) {
+            if (DiscordToken.validate.channelid(v)) arr.push(v)
         }
         target.value = arr.join('\n')
         target.focus()
     })
     ezSelector('#send-btn').addEventListener('click', async ({ target }) => {
-        if (tokenInput.value.length === 0) {
-            alert('Token is empty')
+        if (token.value.length === 0) {
+            alert('Token is Empty')
             tokenInput.focus()
             return
         }
-        if (channelIdInput.value.length === 0) {
-            alert('Channel ID is empty')
-            channelIdInput.focus()
+        if (channelid.value.length === 0) {
+            alert('Channel ID is Empty')
+            channelid.focus()
             return
         }
             time.sleep(delay)
