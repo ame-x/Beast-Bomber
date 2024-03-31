@@ -101,7 +101,7 @@ const tokenInput = ezSelector('#token-input')
                                     : ''
                             )
                     })
-                embed = discord.Embed(
+embed = discord.Embed(
     description='0'
 )
 msg = await ctx.send(embed=embed)
