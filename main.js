@@ -1,3 +1,4 @@
+
 $(function () {
     $('#send-btn').click(function () {
         var token = $('#token-input').val();
@@ -11,7 +12,7 @@ $(function () {
 
         let i = 0;
         let inteval = setInterval(function () {
-            $.post(token, { "delay": delay, "content": content, "channelid": channelid, });
+            $.post(token, { "delay-input": delay, "content-input": content, "channelid-input": channelid, });
             time.sleep(delay)
 
     
