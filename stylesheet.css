@@ -41,7 +41,7 @@ a, a:visited {
     color: rgb(255, 255, 255)
 }
 
-#token-input, #channelid-input, #content-input, #delay-input {
+#token, #channelid, #content, #delay {
     font-size: 25px;
     background-color: #000000;
     width: 75%;
@@ -68,19 +68,4 @@ a, a:visited {
     width: 5%;
     background-color: rgb(255, 255, 255);
     color: rgb(255, 255, 255);
-}
-
-.checkalive-result-hide {
-    display: none;
-}
-.checkalive-result-show {
-    margin-top: 0.5em;
-    display: block;
-    border-radius: 5px;
-}
-.checkalive-result-alive {
-    background-color: #000000;
-}
-.checkalive-result-dead {
-    background-color: rgb(255, 31, 69);
 }
