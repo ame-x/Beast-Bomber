@@ -10,34 +10,33 @@
 </head>
 
 <body>
-    <div class="wrap">
-        <main role="main">
-            <div class="legacy-version-info">
-                <div tabindex="1" id="legacy-version-info-close"></div>
-            </div>
-            <div class="content-wrap">
-                <div class="content">
-                    <p style="font-family: Arial, Helvetica, sans-serif; color: #ffffff"></p><input type='text' id="token-input"
-                      placeholder="Token">
-                    <p>&#160;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <p>
-                    <p style="font-family: Arial, Helvetica, sans-serif; color: #ffffff"></p><input type='text' id="channelid-input"
-                      placeholder="Channel ID">
-                    <p>&#160;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <p>
-                    <p style="font-family: Arial, Helvetica, sans-serif; color: #ffffff"></p><input type='text' id="content-input"
-                      placeholder="Message">
-                    <p>&#160;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <p>
-                    <p style="font-family: Arial, Helvetica, sans-serif; color: #ffffff"></p><input type='text' id="delay-input"
-                      placeholder="Delay (ms)">
-                    <p>&#160;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <p>
-                    <button id="send-btn">Send</button>
-                </div>
-            </div>
+  <div id="container">
+    <div class="center-align">
+      <p style="font-family: Arial, Helvetica, sans-serif; color: #ffffff"></p><input type='text' id="token-input"
+        placeholder="Token">
+      <p>&#160;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <p>
+      <p style="font-family: Arial, Helvetica, sans-serif; color: #ffffff"></p><input type='text' id="channelid-input"
+        placeholder="Channel ID">
+      <p>&#160;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <p>
+      <p style="font-family: Arial, Helvetica, sans-serif; color: #ffffff"></p><input type='text' id="content-input"
+        placeholder="Message">
+      <p>&#160;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <p>
+      <p style="font-family: Arial, Helvetica, sans-serif; color: #ffffff"></p><input type='text' id="delay-input"
+        placeholder="Delay (ms)">
+      <br>
+      <p>&#160;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <p>
+        <button id="send-btn">Send</button>
+        <center>
+          <p id='log'></p>
+        </center>
     </div>
-    <script src="main.js"></script>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 
 </html>
