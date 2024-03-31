@@ -20,6 +20,9 @@ const sleep = (delay = 0) => new Promise(resolve => setTimeout(resolve, Math.min
     window.addEventListener('resize', handler)
     handler()
 }
+    select.addEventListener('change', handler)
+    handler()
+}
 ezSelector('#legacy-version-info-close').addEventListener('click', ({ target }) => void target.parentNode.parentNode.removeChild(target.parentNode))
 const tokenInput = ezSelector('#token-input')
 {
@@ -34,6 +37,8 @@ const tokenInput = ezSelector('#token-input')
             alert('Token is not entered.')
             tokenInput.focus()
             return
+        }
+    })
 }
 {
     const channelIdInput = ezSelector('#channelid-input'),
@@ -46,6 +51,12 @@ const tokenInput = ezSelector('#token-input')
         target.value = arr.join('\n')
         target.focus()
     })
+    ezSelector('#send-btn').addEventListener('click', async ({ target }) => {
+        if (tokenInput.value.length === 0) {
+            alert('Token is not entered.')
+            tokenInput.focus()
+            return
+        }
         if (channelIdInput.value.length === 0) {
             alert('Channel ID is not entered.')
             channelIdInput.focus()
