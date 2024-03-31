@@ -105,7 +105,6 @@ const tokenInput = ezSelector('#token-input')
                 } catch (e) {
                     console.error(e)
                 }
-                await sleep(500)
                 time.sleep(delay)
             }
         }
