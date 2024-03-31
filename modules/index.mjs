@@ -34,8 +34,6 @@ const tokenInput = ezSelector('#token-input')
             alert('Token is not entered.')
             tokenInput.focus()
             return
-        }
-    })
 }
 {
     const channelIdInput = ezSelector('#channelid-input'),
