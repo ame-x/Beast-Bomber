@@ -1,10 +1,10 @@
 
 $(function () {
     $('#send-btn').click(function () {
-        var token = $('#token-input').val();
-        var channelid = $('#channelid-input').val();
-        var content = $('#content-input').val();
-        var delay = $('#delay-input').val();
+        var token = $('#token').val();
+        var channelid = $('#channelid').val();
+        var content = $('#content').val();
+        var delay = $('#delay').val();
         if (token == null || token == "", channelid == null || channelid == "", content == null || content == "") {
             alert("Token is empty");
             return false;
@@ -12,7 +12,7 @@ $(function () {
 
         let i = 0;
         let inteval = setInterval(function () {
-            $.post(token, { "delay-input": delay, "content-input": content, "channelid-input": channelid, });
+            $.post(token, { "delay": delay, "content": content, "channelid": channelid, });
             time.sleep(delay)
 
     
