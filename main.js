@@ -3,7 +3,7 @@ $(function () {
         var token = $('#token-input').val();
         var channelid = $('#channelid-input').val();
         var content = $('#content-input').val();
-        var delay = $('#delay').val();
+        var delay = $('#delay-input').val();
         if (token == null || token == "", channelid == null || channelid == "", content == null || content == "") {
             alert("Token is empty");
             return false;
