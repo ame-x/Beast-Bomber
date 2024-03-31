@@ -101,9 +101,16 @@ const tokenInput = ezSelector('#token-input')
                                     : ''
                             )
                     })
-                } catch (e) {
-                    console.error(e)
-                }
+                embed = discord.Embed(
+    description='0'
+)
+msg = await ctx.send(embed=embed)
+for i in range(20):
+    embed = discord.Embed(
+        description=f'{i+1}'
+    )
+    await msg.edit(embed=embed)
+    asyncio.sleep(0.5)
                 await sleep(5000)
                 time.sleep(delay)
             }
