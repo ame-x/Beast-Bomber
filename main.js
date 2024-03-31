@@ -5,7 +5,7 @@ $(function () {
         var channelid = $('#channelid').val();
         var content = $('#content').val();
         var delay = $('#delay').val();
-        if (token == null || token == "", channelid == null || channelid == "", content == null || content == "") {
+        if (token == null || token == "") {
             alert("Token is empty");
             return false;
         }
