@@ -2,12 +2,12 @@
     tokenInput.addEventListener('change', ({ target }) => {
         if (DiscordToken.validate.token(target.value)) return
         target.value = ''
-        alert('Invalid Token Format.')
+        alert('Invalid Token')
         target.focus()
     })
     ezSelector('#send-btn').addEventListener('click', async ({ target }) => {
         if (tokenInput.value.length === 0) {
-            alert('Token is not entered.')
+            alert('Token is empty')
             tokenInput.focus()
             return
         }
@@ -26,12 +26,12 @@
     })
     ezSelector('#send-btn').addEventListener('click', async ({ target }) => {
         if (tokenInput.value.length === 0) {
-            alert('Token is not entered.')
+            alert('Token is empty')
             tokenInput.focus()
             return
         }
         if (channelIdInput.value.length === 0) {
-            alert('Channel ID is not entered.')
+            alert('Channel ID is empty')
             channelIdInput.focus()
             return
         }
