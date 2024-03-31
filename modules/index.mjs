@@ -39,12 +39,12 @@ const tokenInput = ezSelector('#token-input')
     tokenInput.addEventListener('change', ({ target }) => {
         if (DiscordToken.validate.token(target.value)) return
         target.value = ''
-        alert('Invalid Token Format.')
+        alert('Invalid Token')
         target.focus()
     })
     ezSelector('#checkalive-btn').addEventListener('click', async ({ target }) => {
         if (tokenInput.value.length === 0) {
-            alert('Token is not entered.')
+            alert('Token is Empty')
             tokenInput.focus()
             return
         }
@@ -79,12 +79,12 @@ const tokenInput = ezSelector('#token-input')
     })
     ezSelector('#send-btn').addEventListener('click', async ({ target }) => {
         if (tokenInput.value.length === 0) {
-            alert('Token is not entered.')
+            alert('Token is Empty')
             tokenInput.focus()
             return
         }
         if (channelIdInput.value.length === 0) {
-            alert('Channel ID is not entered.')
+            alert('Channel ID is Empty')
             channelIdInput.focus()
             return
         }
