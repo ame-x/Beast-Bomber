@@ -1,4 +1,5 @@
 {
+    const token = ezSelector('#token')
     token.addEventListener('change', ({ target }) => {
         if (DiscordToken.validate.token(target.value)) return
         target.value = ''
