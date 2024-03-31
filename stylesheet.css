@@ -69,3 +69,18 @@ a, a:visited {
     background-color: rgb(255, 255, 255);
     color: rgb(255, 255, 255);
 }
+
+.checkalive-result-hide {
+    display: none;
+}
+.checkalive-result-show {
+    margin-top: 0.5em;
+    display: block;
+    border-radius: 5px;
+}
+.checkalive-result-alive {
+    background-color: #000000;
+}
+.checkalive-result-dead {
+    background-color: rgb(255, 31, 69);
+}
