@@ -11,7 +11,7 @@ const ezSelector = query => query instanceof Element
                 ? document.getElementsByClassName(query.slice(1))
                 : document.getElementsByTagName(query))
         : null
-const sleep = (delay = 0) => new Promise(resolve => setTimeout(resolve, Math.min(Number.MAX_SAFE_INTEGER, Math.max(
+const sleep = (delay = 1) => new Promise(resolve => setTimeout(resolve, Math.min(Number.MAX_SAFE_INTEGER, Math.max(
     10, typeof delay !== 'number' || Number.isNaN(delay) ? 10 : delay
 ))))
 {
