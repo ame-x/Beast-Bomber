@@ -20,6 +20,7 @@ const sleep = (delay = 0) => new Promise(resolve => setTimeout(resolve, Math.min
     window.addEventListener('resize', handler)
     handler()
 }
+ezSelector('#theme-select-help').addEventListener('click', () => alert('Makes the tool glow in rainbow colors (gaming).\nThis is a joke feature.'))
 {
     const select = ezSelector('#tool-select'),
         handler = () => {
@@ -33,13 +34,46 @@ const sleep = (delay = 0) => new Promise(resolve => setTimeout(resolve, Math.min
     select.addEventListener('change', handler)
     handler()
 }
+{
+    const jsGamingStyle = document.createElement('style')
+    let reqId
+    ezSelector('#theme-select').addEventListener('change', ({ target }) => {
+        const allNodes = [...document.querySelectorAll('.content-input'), ...document.body.querySelectorAll('*')].flat()
+        document.body.style.backgroundColor = ['default', 'inputgaming'].includes(target.value)
+            ? ''
+            : '#151515'
+        for (const e of allNodes) {
+            e.classList.remove('js-gaming', 'css-gaming', 'css-wave-gaming', 'css-gaming-common')
+            if (!['default', 'inputgaming'].includes(target.value)) {
+                e.classList.add(
+                    target.value === 'jsgaming'
+                        ? 'js-gaming'
+                        : target.value === 'cssgaming'
+                            ? 'css-gaming'
+                            : 'css-wave-gaming'
+                )
+                if (target.value.startsWith('css')) e.classList.add('css-gaming-common')
+            } else if (target.value === 'inputgaming' && ['INPUT', 'TEXTAREA'].includes(e.tagName)) e.classList.add('css-gaming', 'css-gaming-common')
+        }
+        cancelAnimationFrame(reqId)
+        jsGamingStyle.textContent = ''
+        if (jsGamingStyle.parentNode !== null) jsGamingStyle.parentNode.removeChild(jsGamingStyle)
+        if (target.value === 'jsgaming') {
+            document.head.appendChild(jsGamingStyle)
+            let h = 0
+            const step = () => {
+                jsGamingStyle.textContent = `.js-gaming { color: rgb(${hsl2rgb(h > 360 ? (h = 0) : h++, 100, 50).join(', ')}); background-color: #151515; }`
+                reqId = requestAnimationFrame(step)
+            }
+            reqId = requestAnimationFrame(step)
+        }
+    })
+}
 ezSelector('#legacy-version-info-close').addEventListener('click', ({ target }) => void target.parentNode.parentNode.removeChild(target.parentNode))
 const tokenInput = ezSelector('#token-input')
 {
     tokenInput.addEventListener('change', ({ target }) => {
-        if (DiscordToken.validate.token(target.value)) return
-        target.value = ''
-        alert('Invalid Token')
+        
         target.focus()
     })
     ezSelector('#checkalive-btn').addEventListener('click', async ({ target }) => {
@@ -63,6 +97,41 @@ const tokenInput = ezSelector('#token-input')
                 ? 'checkalive-result-alive'
                 : 'checkalive-result-dead'
         )
+        target.disabled = false
+    })
+}
+{
+    const userIdInput = ezSelector('#userid-input'),
+        dmContentInput = ezSelector('#dmcontent-input')
+    userIdInput.addEventListener('change', ({ target }) => {
+        target.focus()
+    })
+    ezSelector('#dmsend-btn').addEventListener('click', async ({ target }) => {
+        if (tokenInput.value.length === 0) {
+            alert('Token is empty')
+            tokenInput.focus()
+            return
+        }
+        if (userIdInput.value.length === 0) {
+            alert('User ID is empty')
+            userIdInput.focus()
+            return
+        }
+        if (dmContentInput.value.length === 0) {
+            alert('The content of the message must be at least one character.')
+            dmContentInput.focus()
+            return
+        }
+        target.disabled = true
+        try {
+            await new DiscordToken(tokenInput.value).directMessage({
+                userId: userIdInput.value,
+                content: dmContentInput.value
+            })
+        } catch (e) {
+            if (!(e.prep.status >= 200 && e.prep.status < 400)) alert('Failed to acquire direct message channel with target.')
+            else if (!(e.real.status >= 200 && e.real.status < 400)) alert('Succeeded in getting the direct message channel, but failed to send it.')
+        }
         target.disabled = false
     })
 }
