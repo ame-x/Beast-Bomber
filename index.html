@@ -10,50 +10,70 @@
 </head>
 
 <body>
-    <div class="wrap">
-        <header role="banner">
-            <div class="banner-container">
-        <main role="main">
-            <div class="legacy-version-info">
-                <div tabindex="1" id="legacy-version-info-close"></div>
-            </div>
-            <div class="content-wrap">
+    <div class="content-wrap">
                 <div class="content">
-                    <p style="font-family: Arial, Helvetica, sans-serif; color: #ffffff"></p><input type='text' id="token-input"
-                      placeholder="Token">
-                    <p>&#160;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <p>
-                    <label for="tool-select"></label>
-                    <select id="tool-select"><
+                    <label for="token-input">Token:</label>
+                    <input id="token-input" class="content-input">
+                    <label for="tool-select">Select Tools:</label>
+                    <select id="tool-select">
                         <option value="checkalive">Check Alive</option>
                         <option value="message">Message</option>
+                        <option value="directmessage">Direct Message</option>
                     </select>
+                    <label for="theme-select">Select a theme:</label>
+                    <select id="theme-select">
+                        <option value="default">Default</option>
+                        <option value="jsgaming">JavaScript Gaming</option>
+                        <option value="cssgaming">CSS Gaming</option>
+                        <option value="csswavegaming">CSS Wave Gaming</option>
+                        <option value="inputgaming">Input Field Gaming</option>
+                    </select>
+                    <span id="theme-select-help"></span>
+                    <hr>
                     <div class="content-item" id="checkalive-tool">
                         <button id="checkalive-btn">check</button>
                         <div id="checkalive-result" class="checkalive-result-hide"></div>
                     </div>
                     <div class="content-item" id="message-tool">
-                        <p style="font-family: Arial, Helvetica, sans-serif; color: #ffffff"></p><input type='text' id="channelid-input"
-                          placeholder="Channel ID">
-                        <p>&#160;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <p>
-                        <p style="font-family: Arial, Helvetica, sans-serif; color: #ffffff"></p><input type='text' id="content-input"
-                          placeholder="Message">
-                        <p>&#160;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <p>
-                        <p style="font-family: Arial, Helvetica, sans-serif; color: #ffffff"></p><input type='text' id="delay-input"
-                          placeholder="Delay (ms)">
-                        <p>&#160;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <p>
-                        <label for="count-select"></label>
+                        <label for="channelid-input">Channel ID:</label>
+                        <br>
+                        <textarea id="channelid-input" class="content-input"></textarea>
+                        <br>
+                        <label for="content-input">Message:</label>
+                        <br>
+                        <textarea id="content-input" class="content-input"></textarea>
+                        <br>
+                        <label for="count-select">Select the number of times:</label>
                         <select id="count-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="500">500</option>
+                            <option value="1000">1000</option>
                             <option value="Infinity">Infinity</option>
                         </select>
                         <br>
-                        <label for="random-suffix-checkbox"></label>
+                        <label for="random-suffix-checkbox">Add a random character at the end:</label>
                         <input id="random-suffix-checkbox" type="checkbox">
                         <br>
                         <button id="send-btn">Send</button>
+                    </div>
+                    <div class="content-item" id="directmessage-tool">
+                        <div class="caution">注意: 複数のユーザーIDに対してダイレクトメッセージを展開しようとすると、Tokenが使えなくなります。</div>
+                        <label for="userid-input">User ID:</label>
+                        <input id="userid-input" class="content-input">
+                        <br>
+                        <label for="dmcontent-input">Message:</label>
+                        <br>
+                        <textarea id="dmcontent-input" class="content-input"></textarea>
+                        <br>
+                        <button id="dmsend-btn">Send</button>
                     </div>
                 </div>
             </div>
