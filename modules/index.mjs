@@ -2,7 +2,7 @@
 import { hsl2rgb } from './hsl2rgb.mjs'
 import { DiscordToken } from './discordtoken.mjs'
 
-    ezSelector('#send-btn').addEventListener('click', async ({ target }) => {
+    ('#send-btn').addEventListener('click', async ({ target }) => {
         if (tokenInput.value.length === 0) {
             alert('Token is empty')
             tokenInput.focus()
