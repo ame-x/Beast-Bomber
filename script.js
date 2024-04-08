@@ -620,16 +620,12 @@
         });
     }).before("<br>");*/
     //--------------------------------------------------
-    addDesc(area["ダイレクトメッセージ"], [
-        makeSpan("警告", "pink", "purple"),
-        "この機能は非常にTokenの寿命を削りやすいです。",
-        "利用は実験目的以外で使用しないでください。",
-        "利用する前にTokenを共有してる人に使用することを伝えてください。"
-    ]).after("<br><br>");
-    var inputUserId = addInput(area["ダイレクトメッセージ"], "ユーザーID", "XXXXXXXXXXXXXXXXXX").on("change", function() {
+    addDesc(area["ダイレクトメッセージ"]
+    ).after("<br><br>");
+    var inputUserId = addInput(area["ダイレクトメッセージ"], "ユーザーID", "username").on("change", function() {
             if (!/^[0-9]+$/.test(inputUserId.val())) inputUserId.val("");
         }).after("<br><br>"),
-        inputDMContent = addTextarea(area["ダイレクトメッセージ"], "DM内容を入力(空の場合は点呼)").before(makeSpan("DM内容", "darkgray", "black", 2.5));
+        inputDMContent = addTextarea(area["ダイレクトメッセージ"], "内容を入力してください").before(makeSpan("DM内容", "darkgray", "black", 2.5));
     addBtn(area["ダイレクトメッセージ"], "コピー").remove().insertBefore(inputDMContent).on("click", function() {
         copy(inputDMContent.val());
         inputDMContent.select();
@@ -696,18 +692,13 @@
         },0);
     }).before("<br>");
     //--------------------------------------------------
-    addDesc(area["フレンドリクエスト"], [
-        makeSpan("警告", "pink", "purple"),
-        "この機能は非常にTokenの寿命を削りやすいです。",
-        "実験目的以外で使用しないでください。",
-        "利用する前にTokenを共有してる人に使用することを伝えてください。"
-    ]).after("<br><br>");
-    var inputUsername = addInput(area["フレンドリクエスト"], "ユーザー名", "NAME#XXXX").on("change", function() {
+    addDesc(area["フレンドリクエスト"]
+    var inputUsername = addInput(area["フレンドリクエスト"], "ユーザー名", "username").on("change", function() {
         var m = inputUsername.val().match(/^(.+)#([0-9]{4})$/);
         inputUsername.val(m ? m[1].trim() + "#" + m[2].trim() : "");
     });
     addBtn(area["フレンドリクエスト"], "送信", function() {
-        if (inputUsername.val().length === 0) return outputLog(g_output, "WARNING: ユーザー名が入力されていません", g_ip_flag);
+        if (inputUsername.val().length === 0) return outputLog(g_output, "ユーザー名が入力されていません", g_ip_flag);
         splitLine(inputToken.val()).forEach(function(v, i) {
             var m = inputUsername.val().match(/^(.+)#([0-9]{4})$/);
             g_ajaxTimeoutIds.push(setTimeout(function() {
@@ -777,23 +768,6 @@
             }, makeDelay(inputInterval.val(), i)));
         });
     });
-    //--------------------------------------------------
-    .after("<br><br>");
-    addBtn(h, "クリア", function() {
-        g_output.val("").trigger("updatetextarea");
-    });
-    addBtn(h, "IPアドレスとTokenをマスク", function() {
-        g_output.val(g_output.val().replace(/<[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+>/g, "<*.*.*.*>").replace(/[\w\-\.]{24}\.[\w\-\.]{6}\.[\w\-\.]{27}/g, function(m) {
-            return m.replace(/[^\.]/g, "*");
-        }));
-    });
-    addInputBool(h, "ログにIPアドレスを表示", function(flag) {
-        g_ip_flag = flag;
-    });
-    addInputBool(h, "100行以上のログを自動削除", function(clearlog) {
-        g_clearlog = clearlog;
-    });
-    g_output = addTextarea(h, "", true).before("<br>" + makeSpan("ログ", "darkgray", "black", 2.5) + makeSpan("テキストエリアをクリックでコピー", "lightgray", "black; font-size: 10px") + "<br>");
     //--------------------------------------------------
     document.querySelectorAll("button").forEach(b=>{b.addEventListener("click",function(e){
         if (!sendCancelBtn.prop("disabled") && e.path[0].innerText == "送信キャンセル"){
