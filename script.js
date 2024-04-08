@@ -1,7 +1,6 @@
 (function() {
 
     'use strict';
-    //--------------------------------------------------
     function getRandomInt(max) { // ランダムな数字を生成する
         return Math.floor(Math.random() * max);
     }
@@ -47,25 +46,6 @@
         return elm.find("*").each(function(i, e) {
             e.disabled = !!bool;
         });
-    };
-
-    function outputLog(elm, str, ip_flag, textonly) { // ログを出力する
-        var standardText = ((!textonly ? "[" + new Date().toString().match(/[0-9]{2}:[0-9]{2}:[0-9]{2}/)[0] + "]" : "") + str);
-        if (!ip_flag) elm.val([standardText].concat(splitLine(elm.val())).join("\n")).trigger("updatetextarea");
-        else $.get((window.proxyrequestbool.find("input[type='checkbox']").prop("checked") ? "https://anondiscord.xyz/tokenstool/proxy.php?"+Date.now().toString()+"&url=" : "") + "https://ipinfo.io/?callback=a").always(function(body, statusText, data) {
-            elm.val([(statusText === "success" ? "<" + JSON.parse(body.match(/\{.*?\}/)[0]).ip + ">" : "") + standardText].concat(splitLine(elm.val())).join("\n")).trigger("updatetextarea");
-        });
-        if (g_clearlog){
-            let lines = splitLine(elm.val());
-            if (lines.length > 100) {
-                var result = "";
-                for (var i = 0; i < 100; i++) {
-                    result += lines[i] + "\n";
-                }
-                elm.val(result);
-            }
-        }
-        return elm;
     };
 
     function addBtn(h, title, func) { // ボタンを追加する
@@ -153,13 +133,13 @@
 
     const sleep = delay => new Promise(resolve => setTimeout(resolve, delay)) // sleepを追加する
     window.stopper = false; // キャンセルボタンの変数
-
+    
 /*    setInterval(function(){
         if (whilerun.find("input[type='checkbox']").prop("checked") && window.allow_repeat){
             window.lastclick.click();
         }
     },1000);*/
-    //--------------------------------------------------
+    
     var g_aliveCheckResultClearBtn, // Tokenの生存確認結果クリアボタンを格納する変数
         g_output, // ログの要素を格納する変数
         g_ip_flag = false, // ログ出力時にIPアドレスを表示するかの真偽値を格納する変数
@@ -167,27 +147,12 @@
         g_ajaxTimeoutIds = [], // 通信を行う遅延された関数のsetTimeoutのidを格納する配列
         h = $("<div>").appendTo("body").append($("<h1>").text($("title").text())),
         area = {};
-    ["基本設定", "生存確認", "レイド", "認証", "発言", /*"スラッシュコマンド", */"ダイレクトメッセージ", "フレンドリクエスト", "アバター"].forEach(function(k) {
+    ["Token", "生存確認", "レイド", "認証", "発言", "ダイレクトメッセージ", "フレンドリクエスト", "アバター"].forEach(function(k) {
         area[k] = $("<div>").css({
             backgroundColor: "white",
             padding: "10px"
         });
     });
-    addDesc(h, [
-        makeSpan($("title").text() + " " + makeSpan("Ver.3.2.0", "gray", "skyblue; font-size: 12px; padding: 2.5px"), "darkgray", "purple; font-size: 16px; padding: 2.5px"),
-        "最終更新: 2023/06/12",
-        "",
-        makeSpan("お知らせ", "white", "red"),
-        "このツールは今後更新されません。",
-        "最終更新の日付はこのお知らせの文章を記入した日にちです。",
-        "今後discord側が対策を行ったりしても更新は行われないため、このツールを使用することはおすすめしません。",
-    ]);
-    addBtn(h, "スタッフロール").on("click", function() {
-        var w=(screen.width-640)/2;
-        var h=(screen.height-480)/2;
-        window.open("staffroll.html","sub","width=640,height=480,"+"left="+w+",top="+h+",scrollbars=no,menubar=no,toolbar=no");
-    }).before("<br>");
-    //--------------------------------------------------
     h.append("<hr>");
     var content = $("<div>").css({
         backgroundColor: "lightgray",
@@ -216,38 +181,30 @@
     }
     var proxyrequest = addInputBool(content, document.getElementById("is_login").value=='true' ? "プロキシを経由する" : "プロキシを経由する(ログインが必要です)", function() {}).prop("disabled",document.getElementById("is_login").value=='false');
     window.proxyrequestbool = proxyrequest;
-    var whilerun = addInputBool(content, "繰り返し実行する(一部機能のみ)");
+    var whilerun = addInputBool(content, "繰り返し実行する");
     window.whilerun = whilerun;
     addTab(content, area).css({
         border: "solid 5px gray",
         borderRadius: "5px"
     }).find("div").first().css("background-color", "darkgray");
-    //--------------------------------------------------
+    
     var inputInterval = addInput(area["基本設定"], "リクエスト送信間隔", "[秒]").on("change", function() {
         inputInterval.val(initInterval(Number(inputInterval.val())));
     }).val("0.5");
     area["基本設定"].append("<br>" + makeSpan("Token", "darkgray", "black", 2.5));
-    var inputToken = addTextarea(area["基本設定"], "Tokenを改行で区切って入力\n\n例: " + new Array(4).join("\n************************.******.***************************")).on("change", function() {
+    var inputToken = addTextarea(area["Token"], "Tokenを改行で区切って入力\n\n例: " + new Array(4).join("\n************************.******.***************************")).on("change", function() {
         inputToken.val((inputToken.val().match(/[\w\-.]{59,72}/g) || []).filter(function(x, i, arr) {
             return arr.indexOf(x) === i;
         }).join("\n")).trigger("updatetextarea");
     });
-    addBtn(area["基本設定"], "コピー").remove().insertBefore(inputToken).on("click", function() {
+    addBtn(area["Token"], "コピー").remove().insertBefore(inputToken).on("click", function() {
         copy(inputToken.val());
         inputToken.select();
     });
-    addBtn(area["基本設定"], "クリア").remove().insertBefore(inputToken).after("<br>").on("click", function() {
+    addBtn(area["Token"], "クリア").remove().insertBefore(inputToken).after("<br>").on("click", function() {
         inputToken.val("").trigger("updatetextarea");
     });
-    //--------------------------------------------------
-    var aliveCheckDesc = addDesc(area["生存確認"], [
-            makeSpan("警告", "pink", "purple"),
-            "この機能を使うとtokenの生死を確認できます。",
-            "他人から貰ったtokenの生死を確認する時や実験後にお使いください。",
-            "また、この機能で死んだと判定されていてもそれは一時的なもの、もしくは誤検出かもしれませんので、この機能は参考程度に使用してください。",
-            "判定方法はステータスをオンラインにする通信(オフラインのものがオンラインになることはありません)を送信し、レスポンスの内容によって判定します。",
-            "アカウントを認証してくださいというエラーと認証失敗(Tokenが存在しない)エラーが死亡判定となります。"
-        ]),
+    var aliveCheckDesc = addDesc(area["生存確認"])
         outputAliveToken = addTextarea(area["生存確認"], "", true).before("<br>" + makeSpan("生存判定", "darkgray", "black", 2.5) + makeSpan("テキストエリアをクリックでコピー", "lightgray", "black; font-size: 10px") + "<br>"),
         outputDeadToken = addTextarea(area["生存確認"], "", true).before("<br>" + makeSpan("死亡判定", "darkgray", "black", 2.5) + makeSpan("テキストエリアをクリックでコピー", "lightgray", "black; font-size: 10px") + "<br>"),
         aliveCheckBtn = addBtn(area["生存確認"], "判定").remove().insertAfter(aliveCheckDesc).before("<br><br>").after("<br>").on("click", function() {
@@ -295,17 +252,15 @@
                 }, makeDelay(inputInterval.val(), i)));
             });
         });
-    //--------------------------------------------------
-    addDesc(area["レイド"], [
-        "招待リンクIDには" + makeSpan("「https://discord.com/invite/XXXXXXX」", "white") + "、または" + makeSpan("「https://discord.gg/XXXXXXX」", "white") + "形式の招待リンクか、招待リンクのIDを入力してください。",
-        "サーバーIDには" + makeSpan("「https://discord.com/channels/XXXXXXXXXXXXXXXXXX/XXXXXXXXXXXXXXXXXX」", "white") + "形式のチャンネルURLか、サーバーのIDを入力してください。"
-    ]).after("<br><br>");
-    var inputInvite = addInput(area["レイド"], "招待リンクID", "XXXXXXX").on("change", function() {
+    
+    addDesc(area["レイド"])
+    .after("<br><br>");
+    var inputInvite = addInput(area["レイド"], "招待リンクID").on("change", function() {
         var m = inputInvite.val().match(/^https?:\/\/discord\.(?:com\/invite|gg)\/([0-9a-zA-Z]+)$/) || inputInvite.val().match(/^([0-9a-zA-Z]+)$/);
         inputInvite.val(m ? m[1] : "");
     });
-    addBtn(area["レイド"], "招待を受ける", function() {
-        if (inputInvite.val().length === 0) return outputLog(g_output, "WARNING: 招待リンクIDが入力されていません", g_ip_flag);
+    addBtn(area["レイド"], "参加する", function() {
+        if (inputInvite.val().length === 0) return outputLog(g_output, "招待リンクIDを入力してください", g_ip_flag);
 /*        splitLine(inputToken.val()).forEach(function(v, i) {
             g_ajaxTimeoutIds.push(setTimeout(function() {
                 disabledElement(content, true);
@@ -356,12 +311,13 @@
             }, makeDelay(inputInterval.val(), i)));
         });
     }).after("<br><br>");
-    var inputGuildId = addInput(area["レイド"], "サーバーID", "XXXXXXXXXXXXXXXXXX").change("change", function() {
+    var inputGuildId = addInput(area["レイド"], "サーバーID").change("change", function() {
         var m = inputGuildId.val().match(/^https?:\/\/discord\.com\/channels\/([0-9]+)\/[0-9]+\/?$/) || inputGuildId.val().match(/^([0-9]+)$/);
         inputGuildId.val(m ? m[1] : "");
     });
-    addBtn(area["レイド"], "サーバーから脱退", function() {
-        if (inputGuildId.val().length === 0) return outputLog(g_output, "WARNING: サーバーIDが入力されていません", g_ip_flag);
+    
+    addBtn(area["レイド"], "脱退する", function() {
+        if (inputGuildId.val().length === 0) return outputLog(g_output, "サーバーIDを入力してください", g_ip_flag);
         splitLine(inputToken.val()).forEach(function(v, i) {
             g_ajaxTimeoutIds.push(setTimeout(function() {
                 disabledElement(content, true);
@@ -383,23 +339,16 @@
             }, makeDelay(inputInterval.val(), i)));
         });
     });
-    //--------------------------------------------------
-    addDesc(area["認証"], [
-        "認証リアクションURLはリアクション形式の認証を突破するためのものです。",
-        "認証に使用するリアクションの「Request URL」を入力してください。",
-        "Request URLは開発者ツールのNetworkタブを見ながらリアクションを押した際に表示される「%40me」という通信のRequest URLから取得できます。",
-        "",
-        makeSpan("注意", "Transparent", "red"),
-        "リアクション情報はサーバーから抜けた後も保持されています。",
-        "再度、サーバーに入って認証を受けるとき、一度リアクションを外す必要があります。"
-    ]).after("<br><br>");
+    
+    addDesc(area["認証"])
+    .after("<br><br>");
     var inputReactionURL = addInput(area["認証"], "認証リアクションURL", "https://discord.com/api/v9/channels/XXXXXXXXXXXXXXXXXX/messages/XXXXXXXXXXXXXXXXXX/reactions/XXXXXXX/%40me").width("70%").on("change", function() {
         if (!/^https?:\/\/discord\.com\/api\/v[0-9]{1,2}\/channels\/[0-9]+\/messages\/[0-9]+\/reactions\/[^\/]+\/(%40|@)me$/.test(inputReactionURL.val())) inputReactionURL.val("");
     });
     ["付ける", "外す"].forEach(function(v) {
         var method = (v === "付ける" ? "PUT" : "DELETE");
         addBtn(area["認証"], v, function() {
-            if (inputReactionURL.val().length === 0) return outputLog(g_output, "WARNING: 認証リアクションURLが入力されていません", g_ip_flag);
+            if (inputReactionURL.val().length === 0) return outputLog(g_output, "認証リアクションURLを入力してください", g_ip_flag);
             splitLine(inputToken.val()).forEach(function(v, i) {
                 g_ajaxTimeoutIds.push(setTimeout(function() {
                     disabledElement(content, true);
@@ -422,16 +371,17 @@
             });
         });
     });
-    //--------------------------------------------------
-    addDesc(area["発言"], makeSpan("「https://discord.com/channels/XXXXXXXXXXXXXXXXXX/XXXXXXXXXXXXXXXXXX」", "white") + "形式のチャンネルURLか、チャンネルのIDを入力してください。").after("<br><br>" + makeSpan("チャンネルID", "darkgray", "black", 2.5));
-    var inputChannelId = addTextarea(area["発言"], "発言するチャンネルのIDを改行で区切って入力\n\n例:" + new Array(4).join("\nXXXXXXXXXXXXXXXXXX")).on("change", function() {
+    
+    addDesc(area["発言"])
+    .after("<br><br>" + makeSpan("チャンネルID", "darkgray", "black", 2.5));
+    var inputChannelId = addTextarea(area["発言"].on("change", function() {
         inputChannelId.val(inputChannelId.val().split("\n").map(function(v) {
             var m = v.match(/^https?:\/\/discord\.com\/channels\/[0-9]+\/([0-9]+)\/?$/) || v.match(/^([0-9]+)$/);
             return m ? m[1] : "";
         }).filter(function(x, i, arr) {
             return (arr.indexOf(x) === i && x.length > 0);
         }).join("\n")).trigger("updatetextarea");
-    }).after("<br><br>" + makeSpan("発言内容", "darkgray", "black", 2.5));
+    }).after("<br><br>" + makeSpan("メッセージ", "darkgray", "black", 2.5));
     addBtn(area["発言"], "コピー").remove().insertBefore(inputChannelId).on("click", function() {
         copy(inputChannelId.val());
         inputChannelId.select();
@@ -439,7 +389,8 @@
     addBtn(area["発言"], "クリア").remove().insertBefore(inputChannelId).after("<br>").on("click", function() {
         inputChannelId.val("").trigger("updatetextarea");
     });
-    var inputContent = addTextarea(area["発言"], "発言する内容を入力(空の場合は点呼)").after("<br>");
+    var inputContent = addTextarea(area["メッセージ"]
+    .after("<br>");
     addBtn(area["発言"], "コピー").remove().insertBefore(inputContent).on("click", function() {
         copy(inputContent.val());
         inputContent.select();
@@ -449,7 +400,7 @@
     });
     var inputRandom = addInputBool(area["発言"], "発言の最後にランダムな文字を追加"),
         sayBtn = addBtn(area["発言"], "送信").remove().insertBefore(inputRandom).on("click", function() {
-        if (inputChannelId.val().length === 0) return outputLog(g_output, "WARNING: チャンネルIDが入力されていません");
+        if (inputChannelId.val().length === 0) return outputLog(g_output, "チャンネルIDを入力してください");
         var starts=1;
         if (proxyrequest.find("input[type='checkbox']").prop("checked")){var starts=3;}
         window.allow_repeat = true;
@@ -494,8 +445,9 @@
             }
         },0);
     });
+    
     addBtn(area["発言"], "入力中").remove().insertBefore(sayBtn).on("click", function() {
-        if (inputChannelId.val().length === 0) return outputLog(g_output, "WARNING: チャンネルIDが入力されていません");
+        if (inputChannelId.val().length === 0) return outputLog(g_output, "チャンネルIDを入力してください");
         var starts=1;
         if (proxyrequest.find("input[type='checkbox']").prop("checked")){var starts=3;}
         window.allow_repeat = true;
@@ -535,7 +487,7 @@
             }
         },0);
     });
-    //--------------------------------------------------
+    
 /*    addDesc(area["スラッシュコマンド"], makeSpan("「https://discord.com/channels/XXXXXXXXXXXXXXXXXX/XXXXXXXXXXXXXXXXXX」", "white") + "形式のチャンネルURLか、チャンネルのIDを入力してください。<br>" + makeSpan("警告", "pink", "purple") + "<br>この機能は、テストが完全に済んでいません。<br>凍結される可能性も考えられます。<br注意して使ってください。").after("<br><br>" + makeSpan("チャンネルID", "darkgray", "black", 2.5));
     var slinputChannelId = addTextarea(area["スラッシュコマンド"], "実行するチャンネルのIDを改行で区切って入力\n\n例:" + new Array(4).join("\nXXXXXXXXXXXXXXXXXX")).on("change", function() {
         slinputChannelId.val(slinputChannelId.val().split("\n").map(function(v) {
@@ -619,7 +571,7 @@
             });
         });
     }).before("<br>");*/
-    //--------------------------------------------------
+    
     addDesc(area["ダイレクトメッセージ"]
     ).after("<br><br>");
     var inputUserId = addInput(area["ダイレクトメッセージ"], "ユーザーID", "username").on("change", function() {
