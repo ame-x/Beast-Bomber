@@ -160,15 +160,33 @@
         }
     },1000);*/
     //--------------------------------------------------
+    var g_aliveCheckResultClearBtn, // Tokenの生存確認結果クリアボタンを格納する変数
+        g_output, // ログの要素を格納する変数
+        g_ip_flag = false, // ログ出力時にIPアドレスを表示するかの真偽値を格納する変数
+        g_clearlog = false,
+        g_ajaxTimeoutIds = [], // 通信を行う遅延された関数のsetTimeoutのidを格納する配列
         h = $("<div>").appendTo("body").append($("<h1>").text($("title").text())),
         area = {};
-    ["基本設定", "生存確認", "レイド", "認証", "発言", "ダイレクトメッセージ", "フレンドリクエスト", "アバター"].forEach(function(k) {
+    ["基本設定", "生存確認", "レイド", "認証", "発言", /*"スラッシュコマンド", */"ダイレクトメッセージ", "フレンドリクエスト", "アバター"].forEach(function(k) {
         area[k] = $("<div>").css({
             backgroundColor: "white",
             padding: "10px"
         });
     });
-    
+    addDesc(h, [
+        makeSpan($("title").text() + " " + makeSpan("Ver.3.2.0", "gray", "skyblue; font-size: 12px; padding: 2.5px"), "darkgray", "purple; font-size: 16px; padding: 2.5px"),
+        "最終更新: 2023/06/12",
+        "",
+        makeSpan("お知らせ", "white", "red"),
+        "このツールは今後更新されません。",
+        "最終更新の日付はこのお知らせの文章を記入した日にちです。",
+        "今後discord側が対策を行ったりしても更新は行われないため、このツールを使用することはおすすめしません。",
+    ]);
+    addBtn(h, "スタッフロール").on("click", function() {
+        var w=(screen.width-640)/2;
+        var h=(screen.height-480)/2;
+        window.open("staffroll.html","sub","width=640,height=480,"+"left="+w+",top="+h+",scrollbars=no,menubar=no,toolbar=no");
+    }).before("<br>");
     //--------------------------------------------------
     h.append("<hr>");
     var content = $("<div>").css({
