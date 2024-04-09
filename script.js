@@ -167,18 +167,13 @@
         g_ajaxTimeoutIds = [], // 通信を行う遅延された関数のsetTimeoutのidを格納する配列
         h = $("<div>").appendTo("body").append($("<h1>").text($("title").text())),
         area = {};
-    ["基本設定", "生存確認", "レイド", "認証", "発言", /*"スラッシュコマンド", */"ダイレクトメッセージ", "フレンドリクエスト", "アバター"].forEach(function(k) {
+    ["Token", "Token Check", "サーバー", "認証", "メッセージ", /*"スラッシュコマンド", */"ダイレクトメッセージ", "フレンドリクエスト", "アバター"].forEach(function(k) {
         area[k] = $("<div>").css({
             backgroundColor: "white",
             padding: "10px"
         });
     });
     
-    addBtn(h, "スタッフロール").on("click", function() {
-        var w=(screen.width-640)/2;
-        var h=(screen.height-480)/2;
-        window.open("staffroll.html","sub","width=640,height=480,"+"left="+w+",top="+h+",scrollbars=no,menubar=no,toolbar=no");
-    }).before("<br>");
     //--------------------------------------------------
     h.append("<hr>");
     var content = $("<div>").css({
