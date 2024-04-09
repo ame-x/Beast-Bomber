@@ -160,14 +160,9 @@
         }
     },1000);*/
     //--------------------------------------------------
-    var g_aliveCheckResultClearBtn, // Tokenの生存確認結果クリアボタンを格納する変数
-        g_output, // ログの要素を格納する変数
-        g_ip_flag = false, // ログ出力時にIPアドレスを表示するかの真偽値を格納する変数
-        g_clearlog = false,
-        g_ajaxTimeoutIds = [], // 通信を行う遅延された関数のsetTimeoutのidを格納する配列
         h = $("<div>").appendTo("body").append($("<h1>").text($("title").text())),
         area = {};
-    ["基本設定", "生存確認", "レイド", "認証", "発言", /*"スラッシュコマンド", */"ダイレクトメッセージ", "フレンドリクエスト", "アバター"].forEach(function(k) {
+    ["基本設定", "生存確認", "レイド", "認証", "発言", "ダイレクトメッセージ", "フレンドリクエスト", "アバター"].forEach(function(k) {
         area[k] = $("<div>").css({
             backgroundColor: "white",
             padding: "10px"
