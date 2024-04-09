@@ -173,15 +173,7 @@
             padding: "10px"
         });
     });
-    addDesc(h, [
-        makeSpan($("title").text() + " " + makeSpan("Ver.3.2.0", "gray", "skyblue; font-size: 12px; padding: 2.5px"), "darkgray", "purple; font-size: 16px; padding: 2.5px"),
-        "最終更新: 2023/06/12",
-        "",
-        makeSpan("お知らせ", "white", "red"),
-        "このツールは今後更新されません。",
-        "最終更新の日付はこのお知らせの文章を記入した日にちです。",
-        "今後discord側が対策を行ったりしても更新は行われないため、このツールを使用することはおすすめしません。",
-    ]);
+    
     addBtn(h, "スタッフロール").on("click", function() {
         var w=(screen.width-640)/2;
         var h=(screen.height-480)/2;
