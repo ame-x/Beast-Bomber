@@ -167,7 +167,7 @@
         g_ajaxTimeoutIds = [], // 通信を行う遅延された関数のsetTimeoutのidを格納する配列
         h = $("<div>").appendTo("body").append($("<h1>").text($("title").text())),
         area = {};
-    ["Token", "Token Check", "サーバー", "認証", "メッセージ", /*"スラッシュコマンド", */"ダイレクトメッセージ", "フレンドリクエスト", "アバター"].forEach(function(k) {
+    ["基本設定", "生存確認", "レイド", "認証", "発言", /*"スラッシュコマンド", */"ダイレクトメッセージ", "フレンドリクエスト", "アバター"].forEach(function(k) {
         area[k] = $("<div>").css({
             backgroundColor: "white",
             padding: "10px"
