@@ -768,7 +768,7 @@
     addBtn(h, "クリア", function() {
         g_output.val("").trigger("updatetextarea");
     });
-    g_output = addTextarea(h, "", true).before("<br>" + makeSpan("ログ", "darkgray", "black", 2.5) + makeSpan("テキストエリアをクリックでコピー", "lightgray", "black; font-size: 10px") + "<br>");
+    g_output = addTextarea(h, "", true).before("<br>" + makeSpan("ログ", "darkgray", "black", 2.5) + "<br>");
     //--------------------------------------------------
     document.querySelectorAll("button").forEach(b=>{b.addEventListener("click",function(e){
         if (!sendCancelBtn.prop("disabled") && e.path[0].innerText == "送信キャンセル"){
