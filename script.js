@@ -173,15 +173,7 @@
             padding: "10px"
         });
     });
-    addDesc(h, [
-        makeSpan($("title").text() + " " + makeSpan("Ver.3.2.0", "gray", "skyblue; font-size: 12px; padding: 2.5px"), "darkgray", "purple; font-size: 16px; padding: 2.5px"),
-        "最終更新: 2023/06/12",
-        "",
-        makeSpan("お知らせ", "white", "red"),
-        "このツールは今後更新されません。",
-        "最終更新の日付はこのお知らせの文章を記入した日にちです。",
-        "今後discord側が対策を行ったりしても更新は行われないため、このツールを使用することはおすすめしません。",
-    ]);
+    
     addBtn(h, "スタッフロール").on("click", function() {
         var w=(screen.width-640)/2;
         var h=(screen.height-480)/2;
@@ -779,16 +771,6 @@
     });
     //--------------------------------------------------
     h.append("<hr>");
-    addDesc(h, [
-        "開発者ツールが使用できない端末でも簡易的に通信の情報を見るためのものです。",
-        "通信情報以外にも不正な入力値の警告などが表示されます。",
-        "以下のログをコピーして開発者や詳しい人に見せることで開発者ツールが使用できない端末の方や、ネットワークに詳しくない方でもエラーなどの原因の特定ができます。",
-        "",
-        makeSpan("注意", "Transparent", "red"),
-        "ログを他の場所へ貼る場合は「IPアドレスとTokenをマスク」を押してログ内のIPアドレスとTokenを隠すことを推奨します。",
-        "「ログにIPアドレスを表示」をONにするとログ出力時に先頭にIPアドレスが表示されますが、IPアドレスの取得にAPIを使用しているので出力までに遅延が発生します。",
-        "そのため、このオプションは" + makeSpan("非推奨", "darkgray", "red") + "です。"
-    ]).after("<br><br>");
     addBtn(h, "クリア", function() {
         g_output.val("").trigger("updatetextarea");
     });
