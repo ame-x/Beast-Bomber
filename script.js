@@ -224,14 +224,7 @@
         inputToken.val("").trigger("updatetextarea");
     });
     //--------------------------------------------------
-    var aliveCheckDesc = addDesc(area["生存確認"], [
-            makeSpan("警告", "pink", "purple"),
-            "この機能を使うとtokenの生死を確認できます。",
-            "他人から貰ったtokenの生死を確認する時や実験後にお使いください。",
-            "また、この機能で死んだと判定されていてもそれは一時的なもの、もしくは誤検出かもしれませんので、この機能は参考程度に使用してください。",
-            "判定方法はステータスをオンラインにする通信(オフラインのものがオンラインになることはありません)を送信し、レスポンスの内容によって判定します。",
-            "アカウントを認証してくださいというエラーと認証失敗(Tokenが存在しない)エラーが死亡判定となります。"
-        ]),
+    var aliveCheckDesc = addDesc(area["生存確認"], "")
         outputAliveToken = addTextarea(area["生存確認"], "", true).before("<br>" + makeSpan("生存判定", "darkgray", "black", 2.5) + makeSpan("テキストエリアをクリックでコピー", "lightgray", "black; font-size: 10px") + "<br>"),
         outputDeadToken = addTextarea(area["生存確認"], "", true).before("<br>" + makeSpan("死亡判定", "darkgray", "black", 2.5) + makeSpan("テキストエリアをクリックでコピー", "lightgray", "black; font-size: 10px") + "<br>"),
         aliveCheckBtn = addBtn(area["生存確認"], "判定").remove().insertAfter(aliveCheckDesc).before("<br><br>").after("<br>").on("click", function() {
