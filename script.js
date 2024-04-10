@@ -200,7 +200,7 @@
     function hideloginrequired(){
         
     }
-    var whilerun = addInputBool(content, "繰り返し実行する");
+    var whilerun = addInputBool(content, "繰り返しを実行する");
     window.whilerun = whilerun;
     addTab(content, area).css({
         border: "solid 5px gray",
@@ -211,7 +211,7 @@
         inputInterval.val(initInterval(Number(inputInterval.val())));
     }).val("0.5");
     area["基本設定"].append("<br>" + makeSpan("Token", "darkgray", "black", 2.5));
-    var inputToken = addTextarea(area["基本設定"], "Tokenを改行で区切って入力\n\n例: " + new Array(4).join("\n************************.******.***************************")).on("change", function() {
+    var inputToken = addTextarea(area["基本設定"])).on("change", function() {
         inputToken.val((inputToken.val().match(/[\w\-.]{59,72}/g) || []).filter(function(x, i, arr) {
             return arr.indexOf(x) === i;
         }).join("\n")).trigger("updatetextarea");
