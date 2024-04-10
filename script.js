@@ -200,9 +200,7 @@
     function hideloginrequired(){
         
     }
-    var proxyrequest = addInputBool(content, document.getElementById("is_login").value=='true' ? "プロキシを経由する" : "プロキシを経由する(ログインが必要です)", function() {}).prop("disabled",document.getElementById("is_login").value=='false');
-    window.proxyrequestbool = proxyrequest;
-    var whilerun = addInputBool(content, "繰り返し実行する(一部機能のみ)");
+    var whilerun = addInputBool(content, "繰り返し実行する");
     window.whilerun = whilerun;
     addTab(content, area).css({
         border: "solid 5px gray",
