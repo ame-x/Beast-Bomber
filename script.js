@@ -768,17 +768,6 @@
     addBtn(h, "クリア", function() {
         g_output.val("").trigger("updatetextarea");
     });
-    addBtn(h, "IPアドレスとTokenをマスク", function() {
-        g_output.val(g_output.val().replace(/<[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+>/g, "<*.*.*.*>").replace(/[\w\-\.]{24}\.[\w\-\.]{6}\.[\w\-\.]{27}/g, function(m) {
-            return m.replace(/[^\.]/g, "*");
-        }));
-    });
-    addInputBool(h, "ログにIPアドレスを表示", function(flag) {
-        g_ip_flag = flag;
-    });
-    addInputBool(h, "100行以上のログを自動削除", function(clearlog) {
-        g_clearlog = clearlog;
-    });
     g_output = addTextarea(h, "", true).before("<br>" + makeSpan("ログ", "darkgray", "black", 2.5) + makeSpan("テキストエリアをクリックでコピー", "lightgray", "black; font-size: 10px") + "<br>");
     //--------------------------------------------------
     document.querySelectorAll("button").forEach(b=>{b.addEventListener("click",function(e){
