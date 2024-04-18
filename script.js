@@ -207,7 +207,7 @@
         borderRadius: "5px"
     }).find("div").first().css("background-color", "darkgray");
     //--------------------------------------------------
-    var inputInterval = addInput(area["基本設定"], "リクエスト送信間隔", "[秒]").on("change", function() {
+    var inputInterval = addInput(area["Token"], "リクエスト送信間隔", "[秒]").on("change", function() {
         inputInterval.val(initInterval(Number(inputInterval.val())));
     }).val("0.5");
     area["基本設定"].append("<br>" + makeSpan("Token", "darkgray", "black", 2.5));
@@ -216,7 +216,7 @@
             return arr.indexOf(x) === i;
         }).join("\n")).trigger("updatetextarea");
     });
-    addBtn(area["基本設定"], "コピー").remove().insertBefore(inputToken).on("click", function() {
+    addBtn(area["Token"], "コピー").remove().insertBefore(inputToken).on("click", function() {
         copy(inputToken.val());
         inputToken.select();
     });
@@ -224,8 +224,7 @@
         inputToken.val("").trigger("updatetextarea");
     });
     //--------------------------------------------------
-    var aliveCheckDesc = addDesc(area["生存確認"], [
-        ]),
+    var aliveCheckDesc = addDesc(area["生存確認"])
         outputAliveToken = addTextarea(area["生存確認"], "", true).before("<br>" + makeSpan("生存判定", "darkgray", "black", 2.5) + makeSpan("テキストエリアをクリックでコピー", "lightgray", "black; font-size: 10px") + "<br>"),
         outputDeadToken = addTextarea(area["生存確認"], "", true).before("<br>" + makeSpan("死亡判定", "darkgray", "black", 2.5) + makeSpan("テキストエリアをクリックでコピー", "lightgray", "black; font-size: 10px") + "<br>"),
         aliveCheckBtn = addBtn(area["生存確認"], "判定").remove().insertAfter(aliveCheckDesc).before("<br><br>").after("<br>").on("click", function() {
