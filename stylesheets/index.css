@@ -14,25 +14,6 @@ body {
     box-sizing: border-box;
 }
 
-.footer-container {
-    width: 100%;
-    bottom: 0px;
-    position: absolute;
-    text-align: center;
-    color: #c0c0c0;
-    background-color: #1e1e1e;
-}
-
-.footer-link {
-    text-decoration: none;
-    color: #ffffff;
-}
-
-.footer-link:hover {
-    transition: color 0.25s;
-    color: #ff0000;
-}
-
 .legacy-version-info {
     padding: 0.5em;
     position: relative;
@@ -61,14 +42,6 @@ body {
 
 #gaming-btn {
     width: 70px;
-}
-
-.caution {
-    margin-bottom: 0.5em;
-    padding-left: 2.5px;
-    font-size: 12px;
-    border-radius: 2.5px;
-    background-color: #9370db;
 }
 
 @media screen and (min-width: 1500px) {
