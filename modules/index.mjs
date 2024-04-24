@@ -22,19 +22,6 @@ const sleep = (delay = 0) => new Promise(resolve => setTimeout(resolve, Math.min
 }
 ezSelector('#theme-select-help').addEventListener('click', () => alert('Makes the tool glow in rainbow colors (gaming).\nThis is a joke feature.'))
 {
-    const select = ezSelector('#tool-select'),
-        handler = () => {
-            const e = ezSelector('#checkalive-result')
-            e.classList.remove('checkalive-result-show', 'checkalive-result-alive', 'checkalive-result-dead')
-            e.classList.add('checkalive-result-hide')
-            for (const e of ezSelector('.content-item')) e.style.display = e.id.slice(0, -5) === select.value
-                ? 'block'
-                : 'none'
-        }
-    select.addEventListener('change', handler)
-    handler()
-}
-{
     const jsGamingStyle = document.createElement('style')
     let reqId
     ezSelector('#theme-select').addEventListener('change', ({ target }) => {
