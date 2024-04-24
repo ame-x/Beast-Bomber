@@ -14,21 +14,6 @@ body {
     box-sizing: border-box;
 }
 
-.banner-container {
-    padding: 1em;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
-    background-color: #1e1e1e;
-}
-
-.banner-title {
-    margin: 0px;
-    color: #fffafa;
-}
-
-.banner-version {
-    color: #5555b1;
-}
-
 .footer-container {
     width: 100%;
     bottom: 0px;
