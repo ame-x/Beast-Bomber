@@ -14,6 +14,40 @@ body {
     box-sizing: border-box;
 }
 
+.banner-container {
+    padding: 1em;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+    background-color: #1e1e1e;
+}
+
+.banner-title {
+    margin: 0px;
+    color: #fffafa;
+}
+
+.banner-version {
+    color: #5555b1;
+}
+
+.footer-container {
+    width: 100%;
+    bottom: 0px;
+    position: absolute;
+    text-align: center;
+    color: #c0c0c0;
+    background-color: #1e1e1e;
+}
+
+.footer-link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.footer-link:hover {
+    transition: color 0.25s;
+    color: #ff0000;
+}
+
 .legacy-version-info {
     padding: 0.5em;
     position: relative;
@@ -21,6 +55,18 @@ body {
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
     color: #000000;
     background-color: #ffffa1;
+}
+
+#legacy-version-info-close {
+    right: 5px;
+    bottom: 0px;
+    position: absolute;
+    cursor: pointer;
+    color:#4242fc;
+}
+
+#legacy-version-info-close:hover {
+    text-decoration: underline;
 }
 
 .content-wrap {
@@ -42,6 +88,18 @@ body {
 
 #gaming-btn {
     width: 70px;
+}
+
+.caution {
+    margin-bottom: 0.5em;
+    padding-left: 2.5px;
+    font-size: 12px;
+    border-radius: 2.5px;
+    background-color: #9370db;
+}
+
+#dm-input {
+    width: 100%;
 }
 
 @media screen and (min-width: 1500px) {
