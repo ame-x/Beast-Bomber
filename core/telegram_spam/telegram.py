@@ -9,7 +9,7 @@
 ║  When posting this code on other resources, please indicate the author!         ║
 ║                                                                                 ║
 ║                               All rights reserved.                              ║
-║                            Copyright (C) 2023 ame-x                             ║
+║                            Copyright (C) 2024 ame-x                             ║
 ║                                                                                 ║
 ╚═════════════════════════════════════════════════════════════════════════════════╝
 """
